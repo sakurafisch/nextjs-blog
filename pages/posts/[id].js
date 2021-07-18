@@ -9,6 +9,7 @@ export default function Post({ postData }) {
             {postData.id}
             <br />
             {postData.date}
+            <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
         </Layout>
     );
 }
@@ -26,7 +27,7 @@ export async function getStaticPaths() {
 
 // 接收 id 参数，并根据 id 返回对应的 post
 export async function getStaticProps({ params }) {
-    const postData = getPostData(params.id);
+    const postData = await getPostData(params.id);
     return {
         props: {
             postData
